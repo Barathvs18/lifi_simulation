@@ -19,7 +19,7 @@ const PureFlowLanding = ({ onSingleCell, onMultiCell }) => {
     <div className="pureflow-container">
       {/* Dynamic Hyperspeed Background */}
       <div className="hyperspeed-wrapper">
-        <Hyperspeed 
+        <Hyperspeed
           effectOptions={{
             distortion: 'turbulentDistortion',
             length: 400,
@@ -70,7 +70,6 @@ const PureFlowLanding = ({ onSingleCell, onMultiCell }) => {
 
         <h1 className="main-title">PureFlow</h1>
         <p className="tagline">"The Future of Wireless. Carried by Light."</p>
-        
         <p className="description">
           <span className="brand-name">PureFlow</span> is a <span className="highlight-text">next-generation Li-Fi modulator</span> that merges the extreme speed of <span className="highlight-text">Blue Laser Diodes</span> with the predictive power of <span className="highlight-text">Edge-AI</span>. Engineered to shatter the boundaries of traditional wireless, PureFlow creates an intelligent, self-optimizing <span className="highlight-text">"data-light" environment</span> that moves at the speed of thought.
         </p>
@@ -98,7 +97,8 @@ const PureFlowLanding = ({ onSingleCell, onMultiCell }) => {
         </button>
       </section>
       {/* Scoped CSS */}
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         /* CSS reset & base for component */
         .pureflow-container {
           position: relative;
@@ -209,8 +209,7 @@ const PureFlowLanding = ({ onSingleCell, onMultiCell }) => {
           opacity: 0;
           transform: translateY(20px);
         }
-
-        .description {
+                  .description {
           font-size: 1.1rem;
           color: #b0c4de;
           line-height: 1.8;
@@ -229,18 +228,51 @@ const PureFlowLanding = ({ onSingleCell, onMultiCell }) => {
           text-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
           letter-spacing: 0.5px;
         }
-
-        .highlight-text {
+                  .highlight-text {
           color: #00d4ff;
           font-weight: 600;
           text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
         }
-
         .brand-name {
           color: #ffffff;
           font-weight: 700;
           font-family: 'Orbitron', sans-serif;
           letter-spacing: 1px;
+        }
+
+        .highlight-brand {
+          color: #ffffff;
+          font-weight: 800;
+          font-family: 'Orbitron', sans-serif;
+          letter-spacing: 1px;
+          text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .highlight-main {
+          color: #00d4ff;
+          font-weight: 700;
+          position: relative;
+          display: inline-block;
+          padding: 0 4px;
+        }
+
+        .highlight-main::after {
+          content: '';
+          position: absolute;
+          bottom: 2px;
+          left: 0;
+          width: 100%;
+          height: 30%;
+          background: rgba(0, 212, 255, 0.15);
+          z-index: -1;
+          border-radius: 4px;
+        }
+
+        .highlight-alt {
+          color: #00d4ff;
+          font-weight: 600;
+          border-bottom: 2px dashed rgba(0, 212, 255, 0.3);
+          cursor: help;
         }
 
         .divider {
