@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Hyperspeed from './Hyperspeed';
 
 const PureFlowLanding = ({ onSingleCell, onMultiCell }) => {
   useEffect(() => {
@@ -16,18 +17,45 @@ const PureFlowLanding = ({ onSingleCell, onMultiCell }) => {
 
   return (
     <div className="pureflow-container">
-      {/* Background Elements */}
-      <div className="pureflow-bg-grid" />
-      <div className="pureflow-beams">
-        <div className="beam beam-1" />
-        <div className="beam beam-2" />
-        <div className="beam beam-3" />
-      </div>
-
-      <div className="particles">
-        {[...Array(8)].map((_, i) => (
-          <div key={i} className={`particle particle-${i + 1}`} />
-        ))}
+      {/* Dynamic Hyperspeed Background */}
+      <div className="hyperspeed-wrapper">
+        <Hyperspeed 
+          effectOptions={{
+            distortion: 'turbulentDistortion',
+            length: 400,
+            roadWidth: 10,
+            islandWidth: 2,
+            lanesPerRoad: 4,
+            fov: 90,
+            fovSpeedUp: 150,
+            speedUp: 2,
+            carLightsFade: 0.4,
+            totalSideLightSticks: 20,
+            lightPairsPerRoadWay: 40,
+            shoulderLinesWidthPercentage: 0.05,
+            brokenLinesWidthPercentage: 0.1,
+            brokenLinesLengthPercentage: 0.5,
+            lightStickWidth: [0.12, 0.5],
+            lightStickHeight: [1.3, 1.7],
+            movingAwaySpeed: [60, 80],
+            movingCloserSpeed: [-120, -160],
+            carLightsLength: [400 * 0.03, 400 * 0.2],
+            carLightsRadius: [0.05, 0.14],
+            carWidthPercentage: [0.3, 0.5],
+            carShiftX: [-0.8, 0.8],
+            carFloorSeparation: [0.05, 5],
+            colors: {
+              roadColor: 0x080808,
+              islandColor: 0x0a0a0a,
+              background: 0x000000,
+              shoulderLines: 0xffffff,
+              brokenLines: 0xffffff,
+              leftCars: [0x00d4ff, 0x0088ff, 0x00ffff],
+              rightCars: [0xff4d00, 0xff8800, 0xff0000],
+              sticks: 0x00d4ff
+            }
+          }}
+        />
       </div>
 
       {/* Hero Section */}
@@ -44,7 +72,7 @@ const PureFlowLanding = ({ onSingleCell, onMultiCell }) => {
         <p className="tagline">"The Future of Wireless. Carried by Light."</p>
         
         <p className="description">
-          PureFlow harnesses the power of Light Fidelity (LiFi) technology — using infrared light beams to deliver ultra-fast, secure, and interference-free wireless communication indoors. No radio waves. No congestion. Just pure light.
+          <span className="brand-name">PureFlow</span> is a <span className="highlight-text">next-generation Li-Fi modulator</span> that merges the extreme speed of <span className="highlight-text">Blue Laser Diodes</span> with the predictive power of <span className="highlight-text">Edge-AI</span>. Engineered to shatter the boundaries of traditional wireless, PureFlow creates an intelligent, self-optimizing <span className="highlight-text">"data-light" environment</span> that moves at the speed of thought.
         </p>
 
         <div className="divider" />
@@ -95,30 +123,8 @@ const PureFlowLanding = ({ onSingleCell, onMultiCell }) => {
           font-family: 'Orbitron', sans-serif;
         }
 
-        /* Animated Background Grid */
-        .pureflow-bg-grid {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-image: 
-            linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
-          background-size: 50px 50px;
-          background-position: center center;
-          z-index: -2;
-          opacity: 0.5;
-          animation: moveGrid 20s linear infinite;
-        }
-
-        @keyframes moveGrid {
-          0% { transform: translateY(0); }
-          100% { transform: translateY(50px); }
-        }
-
-        /* LiFi Beams */
-        .pureflow-beams {
+        /* Hyperspeed Background Wrapper */
+        .hyperspeed-wrapper {
           position: absolute;
           top: 0;
           left: 0;
@@ -126,85 +132,7 @@ const PureFlowLanding = ({ onSingleCell, onMultiCell }) => {
           height: 100%;
           z-index: -1;
           pointer-events: none;
-          overflow: hidden;
-        }
-
-        .beam {
-          position: absolute;
-          width: 2px;
-          height: 150vh;
-          opacity: 0.15;
-          transform-origin: top center;
-          box-shadow: 0 0 20px 2px currentColor;
-        }
-
-        .beam-1 {
-          top: -20vh;
-          left: 10vw;
-          color: #00d4ff;
-          animation: sweep1 14s ease-in-out infinite alternate;
-        }
-
-        .beam-2 {
-          top: -10vh;
-          left: 80vw;
-          color: #ff4d00;
-          animation: sweep2 18s ease-in-out infinite alternate-reverse;
-        }
-
-        .beam-3 {
-          top: -30vh;
-          left: 50vw;
-          color: #00d4ff;
-          animation: sweep3 22s ease-in-out infinite alternate;
-        }
-
-        @keyframes sweep1 {
-          0% { transform: rotate(20deg) translateX(-15vw); }
-          100% { transform: rotate(50deg) translateX(15vw); }
-        }
-
-        @keyframes sweep2 {
-          0% { transform: rotate(-40deg) translateX(-10vw); }
-          100% { transform: rotate(-10deg) translateX(10vw); }
-        }
-
-        @keyframes sweep3 {
-          0% { transform: rotate(5deg) translateX(-20vw); }
-          100% { transform: rotate(35deg) translateX(20vw); }
-        }
-
-        /* Floating Particles */
-        .particles {
-          position: absolute;
-          top: 0; left: 0; width: 100%; height: 100%;
-          z-index: -1; pointer-events: none;
-          overflow: hidden;
-        }
-
-        .particle {
-          position: absolute;
-          width: 4px; height: 4px;
-          border-radius: 50%;
-          bottom: -10px;
-          animation: floatUp var(--duration, 8s) linear infinite;
-          opacity: 0;
-        }
-
-        .particle-1 { left: 15%; --duration: 7s; animation-delay: 0.5s; background: #00d4ff; box-shadow: 0 0 10px 2px #00d4ff; }
-        .particle-2 { left: 85%; --duration: 11s; animation-delay: 2.1s; background: #ff4d00; box-shadow: 0 0 10px 2px #ff4d00; }
-        .particle-3 { left: 35%; --duration: 9s; animation-delay: 1.2s; background: #00d4ff; box-shadow: 0 0 10px 2px #00d4ff; }
-        .particle-4 { left: 65%; --duration: 14s; animation-delay: 3.5s; background: #ff4d00; box-shadow: 0 0 10px 2px #ff4d00; }
-        .particle-5 { left: 50%; --duration: 8s; animation-delay: 0.1s; background: #00d4ff; box-shadow: 0 0 10px 2px #00d4ff; }
-        .particle-6 { left: 25%; --duration: 12s; animation-delay: 4.2s; background: #ff4d00; box-shadow: 0 0 10px 2px #ff4d00; }
-        .particle-7 { left: 75%; --duration: 10s; animation-delay: 2.8s; background: #00d4ff; box-shadow: 0 0 10px 2px #00d4ff; }
-        .particle-8 { left: 45%; --duration: 13s; animation-delay: 1.9s; background: #ff4d00; box-shadow: 0 0 10px 2px #ff4d00; }
-
-        @keyframes floatUp {
-          0% { transform: translateY(0) scale(0.5); opacity: 0; }
-          20% { opacity: 0.6; }
-          80% { opacity: 0.4; }
-          100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+          opacity: 0.6;
         }
 
         /* Hero Section */
@@ -284,12 +212,35 @@ const PureFlowLanding = ({ onSingleCell, onMultiCell }) => {
 
         .description {
           font-size: 1.1rem;
-          color: #4a6080;
-          line-height: 1.6;
-          max-width: 600px;
+          color: #b0c4de;
+          line-height: 1.8;
+          max-width: 700px;
           animation: fadeInSlideUp 1s ease 0.6s forwards;
           opacity: 0;
           transform: translateY(20px);
+          background: rgba(0, 212, 255, 0.03);
+          padding: 25px;
+          border-radius: 20px;
+          border: 1px solid rgba(0, 212, 255, 0.15);
+          backdrop-filter: blur(10px);
+          box-shadow: 
+            0 10px 30px rgba(0, 0, 0, 0.5),
+            inset 0 0 20px rgba(0, 212, 255, 0.05);
+          text-shadow: 0 0 30px rgba(0, 212, 255, 0.1);
+          letter-spacing: 0.5px;
+        }
+
+        .highlight-text {
+          color: #00d4ff;
+          font-weight: 600;
+          text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .brand-name {
+          color: #ffffff;
+          font-weight: 700;
+          font-family: 'Orbitron', sans-serif;
+          letter-spacing: 1px;
         }
 
         .divider {
